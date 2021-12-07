@@ -29,13 +29,17 @@ public class CharacterControllerScripte : MonoBehaviour
     public float IKHandInfluenceRAnge;
     public float OffSettToWall;
 
-    [Header("IK Raycat foot")]
+    [Header("IK Raycat foot")] 
+    public bool IsActiveFootIK;
     public Transform RightFoot;
     public Transform LeftFoot;
     public Rig IKRightFoot;
     public Rig IKLeftFoot;
     public Transform IKRightFootTarget;
     public Transform IKLeftFootTarget;
+    [Header("Foot Effect")] 
+    public GameObject RightFootDecal;
+    public GameObject LeftFootDecal;
     
     private float _actualeSpeed=0;
     private bool _isGRounded;
@@ -107,6 +111,11 @@ public class CharacterControllerScripte : MonoBehaviour
 
     private void FootIK()
     {
+        if (!IsActiveFootIK) {
+            IKLeftFoot.weight = 0;
+            IKRightFoot.weight = 0;
+            return;
+        }
         Debug.DrawLine(LeftFoot.position+Vector3.up , LeftFoot.position+Vector3.down,Color.green);
         Debug.DrawLine(RightFoot.position+Vector3.up ,RightFoot.position+ Vector3.down,Color.green);
         RaycastHit hit;
